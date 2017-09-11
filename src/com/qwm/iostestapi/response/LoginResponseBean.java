@@ -6,7 +6,7 @@ package com.qwm.iostestapi.response;
  * @decription:
  *  登录的放回状态码
  */
-public class LoginResponseBean extends BaseResponseBean {
+public class LoginResponseBean implements IQwmResponse {
     /**
      * 用户名
      */

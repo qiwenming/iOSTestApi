@@ -53,8 +53,15 @@
 
 
 ### 返回示例
-```$xslt
-使用代码块包起来
+```json
+{
+    "code": 200,
+    "msg": "登录成功",
+    "t": {
+        "userName": "qiwenming",
+        "clientType": "1"
+    }
+}
 ```
 
 

@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.qwm.iostestapi.response.BaseResponseBean;
 import com.qwm.iostestapi.response.LoginResponseBean;
 import com.qwm.iostestapi.response.ResponseStatusCode;
+import com.qwm.iostestapi.utils.Md5Utils;
 import com.qwm.iostestapi.utils.TextUtils;
 
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
             requstStatus = LOGIN_PASSWORD_NULL;
         }else if( !mUserName.equals(username) ){
             requstStatus = LOGIN_ACCOUNT_ERROR;
-        }else if( !mPassword.equals(pwd.toLowerCase()) ){//屏蔽大小写产生的影响
+        }else if( !mPassword.equals(Md5Utils.md5Encode(pwd.toLowerCase())) ){//屏蔽大小写产生的影响
             requstStatus = LOGIN_PASSWORD_ERROR;
         }else{
             requstStatus = OK;
