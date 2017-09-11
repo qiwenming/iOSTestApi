@@ -6,6 +6,11 @@ public enum  ResponseStatusCode {
 
     SERIVE_ERROR(500, "服务器有误"),
 
+    URI_NULL(600, "至少应该请求一个真正的接口吧"),
+
+    CLIENT_TYPE_NULL(700, "客户端类型不能为空"),
+    CLIENT_TYPE_ERROR(701, "客户端类型有误"),
+
     LOGIN_ACCOUNT_NULL(20001, "账号不能为空"),
     LOGIN_PASSWORD_NULL(20002, "密码不能为空"),
     LOGIN_ACCOUNT_ERROR(20003, "账号有误"),

@@ -34,6 +34,7 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
         //1.获取参数
         String username = request.getParameter("userName");
         String pwd = request.getParameter("password");
+        String clientType = request.getHeader("QWM-CLIENT-TYPE");
 
         //2. 创建响应的状态的枚举
         ResponseStatusCode requstStatus = SERIVE_ERROR;
@@ -48,7 +49,7 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
             requstStatus = LOGIN_PASSWORD_NULL;
         }else if( !mUserName.equals(username) ){
             requstStatus = LOGIN_ACCOUNT_ERROR;
-        }else if( !mPassword.equals(pwd) ){
+        }else if( !mPassword.equals(pwd.toLowerCase()) ){//屏蔽大小写产生的影响
             requstStatus = LOGIN_PASSWORD_ERROR;
         }else{
             requstStatus = OK;
@@ -56,6 +57,7 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
             //创建登录信息的实体类
             LoginResponseBean loginResp = new LoginResponseBean();
             loginResp.userName = mUserName;
+            loginResp.clientType = clientType;
             baseResponseBean.t = loginResp;
         }
 

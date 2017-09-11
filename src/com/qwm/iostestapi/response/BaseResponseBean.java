@@ -12,4 +12,9 @@ public class BaseResponseBean<T> implements Serializable {
     public int code;//响应的状态码（自己定义的）
     public String msg;//（描述信息）
     public T t;
+
+    public void setStatusCode(ResponseStatusCode statusCode){
+        this.msg = statusCode.getDesc();
+        this.code = statusCode.getCode();
+    }
 }

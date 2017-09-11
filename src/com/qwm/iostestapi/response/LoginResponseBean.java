@@ -7,5 +7,12 @@ package com.qwm.iostestapi.response;
  *  登录的放回状态码
  */
 public class LoginResponseBean extends BaseResponseBean {
+    /**
+     * 用户名
+     */
     public String userName;
+    /**
+     * 客户端类型
+     */
+    public String clientType;
 }
