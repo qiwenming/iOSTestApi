@@ -1,13 +1,15 @@
 package com.qwm.iostestapi.servlet;
 
-import com.google.gson.Gson;
+import com.qwm.iostestapi.common.Contanst;
 import com.qwm.iostestapi.response.BaseResponseBean;
 import com.qwm.iostestapi.response.LoginResponseBean;
 import com.qwm.iostestapi.response.ResponseStatusCode;
+import com.qwm.iostestapi.utils.AccountUtils;
 import com.qwm.iostestapi.utils.Md5Utils;
 import com.qwm.iostestapi.utils.TextUtils;
 
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import static com.qwm.iostestapi.response.ResponseStatusCode.*;
 
@@ -16,26 +18,16 @@ import static com.qwm.iostestapi.response.ResponseStatusCode.*;
  * @date: 2017-09-11 12:53:46  星期一
  * @decription: 模拟登录接口
  */
-public class LoginServlet extends javax.servlet.http.HttpServlet {
+public class LoginServlet extends BaseServlet<LoginResponseBean> {
 
-    /**
-     * 用户名
-     */
-    private String mUserName = "qiwenming";
-    /**
-     * 密码 123456 的二次 MD5 值
-     */
-    private String mPassword = "14e1b600b1fd579f47433b88e8d85291";
-
-    protected void doPost(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-        doGet(request,response);
-    }
-
-    protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+    @Override
+    public BaseResponseBean<LoginResponseBean> handlerRequest(HttpServletRequest request, HttpServletResponse response) {
         //1.获取参数
         String username = request.getParameter("userName");
         String pwd = request.getParameter("password");
-        String clientType = request.getHeader("QWM-CLIENT-TYPE");
+        String clientType = request.getHeader(Contanst.QWM_CLIENT_TYPE);
+        //服务器保存的密码
+        String password = AccountUtils.getsInstance().getPasswordByUserName(username);
 
         //2. 创建响应的状态的枚举
         ResponseStatusCode requstStatus = SERIVE_ERROR;
@@ -48,16 +40,16 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
             requstStatus = LOGIN_ACCOUNT_NULL;
         }else if( TextUtils.isEmpty(pwd) ){
             requstStatus = LOGIN_PASSWORD_NULL;
-        }else if( !mUserName.equals(username) ){
-            requstStatus = LOGIN_ACCOUNT_ERROR;
-        }else if( !mPassword.equals(Md5Utils.md5Encode(pwd.toLowerCase())) ){//屏蔽大小写产生的影响
+        }else if( TextUtils.isEmpty(password) ){//账户不存在
+            requstStatus = LOGIN_ACCOUNT_NO_EXITS;
+        }else if( !password.equals(Md5Utils.md5Encode(pwd.toLowerCase())) ){//屏蔽大小写产生的影响
             requstStatus = LOGIN_PASSWORD_ERROR;
         }else{
             requstStatus = OK;
             requstStatus.setDesc("登录成功");
             //创建登录信息的实体类
             LoginResponseBean loginResp = new LoginResponseBean();
-            loginResp.userName = mUserName;
+            loginResp.userName = username;
             loginResp.clientType = clientType;
             baseResponseBean.t = loginResp;
         }
@@ -66,12 +58,7 @@ public class LoginServlet extends javax.servlet.http.HttpServlet {
         baseResponseBean.code = requstStatus.getCode();
         baseResponseBean.msg = requstStatus.getDesc();
 
-        //6. 对象转为json
-        String json = new Gson().toJson(baseResponseBean);
-
-        System.out.println(json);
-
-        //7. 返回Gson
-        response.getWriter().write(json);
+        return baseResponseBean;
     }
+
 }

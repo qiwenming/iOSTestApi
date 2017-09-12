@@ -14,8 +14,8 @@ public enum  ResponseStatusCode {
     LOGIN_ACCOUNT_NULL(20001, "账号不能为空"),
     LOGIN_PASSWORD_NULL(20002, "密码不能为空"),
     LOGIN_ACCOUNT_ERROR(20003, "账号有误"),
-    LOGIN_PASSWORD_ERROR(20004, "密码有误");
-
+    LOGIN_PASSWORD_ERROR(20004, "密码有误"),
+    LOGIN_ACCOUNT_NO_EXITS(20005, "账户不存在");
 
     private int code;
     private String desc;

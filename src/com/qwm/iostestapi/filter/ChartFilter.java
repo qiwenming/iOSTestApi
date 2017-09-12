@@ -1,25 +1,23 @@
 package com.qwm.iostestapi.filter;
 
 import com.google.gson.Gson;
+import com.qwm.iostestapi.common.Contanst;
 import com.qwm.iostestapi.response.BaseResponseBean;
 import com.qwm.iostestapi.response.ResponseStatusCode;
 import com.qwm.iostestapi.utils.TextUtils;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.qwm.iostestapi.response.ResponseStatusCode.CLIENT_TYPE_ERROR;
-import static com.qwm.iostestapi.response.ResponseStatusCode.CLIENT_TYPE_NULL;
-import static com.qwm.iostestapi.response.ResponseStatusCode.OK;
+import static com.qwm.iostestapi.response.ResponseStatusCode.*;
 
 /**
  * @author: wiming
  * @date: 2017-09-11 13:49:21  星期一
  * @decription: 字符过滤器，目的就是为了让所有的请求和响应都是 UTF-8
+ *   还有判断我们的地址是否符合要求,是否携带了 客户端类型（1：安卓 2：iOS）
  */
 public class ChartFilter implements Filter {
 
@@ -51,11 +49,11 @@ public class ChartFilter implements Filter {
         }
 
         //3. 从请求头上获取到我们的客户端，客户端类型（1：安卓 2：iOS）
-        String clientType = request.getHeader("QWM-CLIENT-TYPE");
+        String clientType = request.getHeader(Contanst.QWM_CLIENT_TYPE);
         ResponseStatusCode statusCode = OK;
         if (TextUtils.isEmpty(clientType)) {//没有传递客户端而类型，那么不让通过，告诉用户需要传递客户端类型
             statusCode = CLIENT_TYPE_NULL;
-        } else if (!"1".equals(clientType) && "2".equals(clientType)) {
+        } else if (!"1".equals(clientType) && !"2".equals(clientType)) {
             statusCode = CLIENT_TYPE_ERROR;;
         }
 
