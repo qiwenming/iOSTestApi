@@ -28,12 +28,12 @@ public class WeatherUtils {
         //创建map集合
         weatherMap = new HashMap<>();
         //添加账户
-        WeatherRespBean w1 = new WeatherRespBean("Beijing","晴转多云");
-        WeatherRespBean w2 = new WeatherRespBean("Shenzhen","晴转多云");
-        WeatherRespBean w3 = new WeatherRespBean("Shangahi","晴转多云");
-        WeatherRespBean w4 = new WeatherRespBean("Yuannan","晴转多云");
-        WeatherRespBean w5 = new WeatherRespBean("Guangzhou","晴转多云");
-        WeatherRespBean w6 = new WeatherRespBean("Sichuan","晴转多云");
+        WeatherRespBean w1 = new WeatherRespBean("beijing","晴转多云");
+        WeatherRespBean w2 = new WeatherRespBean("shenzhen","晴转多云");
+        WeatherRespBean w3 = new WeatherRespBean("shangahi","晴转多云");
+        WeatherRespBean w4 = new WeatherRespBean("yuannan","晴转多云");
+        WeatherRespBean w5 = new WeatherRespBean("guangzhou","晴转多云");
+        WeatherRespBean w6 = new WeatherRespBean("sichuan","晴转多云");
         weatherMap.put(w1.ciry,w1);
         weatherMap.put(w2.ciry,w2);
         weatherMap.put(w3.ciry,w3);
@@ -55,8 +55,11 @@ public class WeatherUtils {
      * @return
      */
     public List<WeatherRespBean> getWeatherByCityName(String cityName){
+        if(TextUtils.isEmpty(cityName)){
+            return null;
+        }
         List<WeatherRespBean> weathers = new ArrayList<>();
-        WeatherRespBean w = weatherMap.get(cityName);
+        WeatherRespBean w = weatherMap.get(cityName.toLowerCase());
         if(w!=null){
             weathers.add(w);
         }
@@ -73,7 +76,7 @@ public class WeatherUtils {
             return null;
         List<WeatherRespBean> weathers = new ArrayList<>();
         for (String city:citys) {
-            WeatherRespBean w = weatherMap.get(city);
+            WeatherRespBean w = weatherMap.get(city.toLowerCase());
             if(w!=null){
                 weathers.add(w);
             }
@@ -91,7 +94,7 @@ public class WeatherUtils {
             return null;
         List<WeatherRespBean> weathers = new ArrayList<>();
         for (String city:citys) {
-            WeatherRespBean w = weatherMap.get(city);
+            WeatherRespBean w = weatherMap.get(city.toLowerCase());
             if(w!=null){
                 weathers.add(w);
             }

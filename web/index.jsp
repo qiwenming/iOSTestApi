@@ -67,6 +67,7 @@
 <br>
 <p>-------------文件上传-------------<br>
 <form action="upload" method="post" enctype="multipart/form-data">
+    上传用户：<input type="text" name="userName"><br/>
     <input type="file" name="file"><br>
     返回数据格式<select name="dataType">
     <option value="JSON">JSON</option>

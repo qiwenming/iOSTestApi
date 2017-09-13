@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.qwm.iostestapi.common.Contanst.DATA_TYPE;
+
 /**
  * @author: qiwenming(杞文明)
  * @date: 17/9/13 上午1:34
@@ -31,7 +33,12 @@ public abstract class BaseServlet<T> extends javax.servlet.http.HttpServlet {
         }
 
         //获取数据响应的数据格式类型  json 和xml
-        String dataType = request.getParameter("dataType");
+        String dataType = request.getParameter(DATA_TYPE);
+        //上传文件这样的接口中，安装上面的方法是拿不到我们的 dataType的，
+        //但是我们在处理的时候，会把它添加到 属性中 具体看 UploadFileServlet
+        if(TextUtils.isEmpty(dataType)){
+            dataType = (String) request.getAttribute(DATA_TYPE);
+        }
 
         String responseStr = "";
 
