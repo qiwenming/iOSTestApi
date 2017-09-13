@@ -34,4 +34,24 @@
         <url-pattern>/video</url-pattern>
     </servlet-mapping>
 
+    <!--文件上传接口-->
+    <servlet>
+        <servlet-name>UploadFileServlet</servlet-name>
+        <servlet-class>com.qwm.iostestapi.servlet.UploadFileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadFileServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+
+    <!--获取天气接口-->
+    <servlet>
+        <servlet-name>WeatherServlet</servlet-name>
+        <servlet-class>com.qwm.iostestapi.servlet.WeatherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WeatherServlet</servlet-name>
+        <url-pattern>/weather</url-pattern>
+    </servlet-mapping>
+
 </web-app>

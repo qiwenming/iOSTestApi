@@ -67,9 +67,9 @@ public abstract class BaseServlet<T> extends javax.servlet.http.HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req,resp);
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request,response);
     }
 
-    public abstract BaseResponseBean<T> handlerRequest(HttpServletRequest req, HttpServletResponse resp);
+    public abstract BaseResponseBean<T> handlerRequest(HttpServletRequest request, HttpServletResponse response);
 }
