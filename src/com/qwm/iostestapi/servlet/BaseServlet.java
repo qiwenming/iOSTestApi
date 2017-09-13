@@ -2,12 +2,15 @@ package com.qwm.iostestapi.servlet;
 
 import com.google.gson.Gson;
 import com.qwm.iostestapi.response.BaseResponseBean;
+import com.qwm.iostestapi.utils.JaxbUtils;
 import com.qwm.iostestapi.utils.TextUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: qiwenming(杞文明)
@@ -27,7 +30,8 @@ public abstract class BaseServlet<T> extends javax.servlet.http.HttpServlet {
             throw new RuntimeException("处理的结果不能为空");
         }
 
-        String dataType = request.getHeader("dataType");
+        //获取数据响应的数据格式类型  json 和xml
+        String dataType = request.getParameter("dataType");
 
         String responseStr = "";
 
@@ -36,6 +40,18 @@ public abstract class BaseServlet<T> extends javax.servlet.http.HttpServlet {
             //放回的是xml
             response.setContentType("text/xml;charset=utf-8");
 
+            List<Class> clz = new ArrayList<Class>();
+            clz.add(BaseResponseBean.class);
+            //获取我们的泛型的实际类型
+            if(baseResponseBean.t!=null){
+                responseStr = JaxbUtils.convertToXml(baseResponseBean,BaseResponseBean.class,baseResponseBean.t.getClass());
+            }else{
+                responseStr = JaxbUtils.convertToXml(baseResponseBean,BaseResponseBean.class);
+            }
+            //去掉我们的 t中的属性
+            // <t xsi:type="loginResponseBean" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            // 替换为 <t>
+            responseStr = responseStr.replaceAll("xsi:type=\"\\w+\" xmlns:xsi=\"\\S+\"","");
         }else{
             //返回json
             //对象转为json

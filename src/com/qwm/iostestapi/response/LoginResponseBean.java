@@ -14,25 +14,10 @@ public class LoginResponseBean implements IQwmResponse {
     /**
      * 用户名
      */
-    private String userName;
+    public String userName;
     /**
      * 客户端类型
      */
-    private String clientType;
+    public String clientType;
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getClientType() {
-        return clientType;
-    }
-
-    public void setClientType(String clientType) {
-        this.clientType = clientType;
-    }
 }

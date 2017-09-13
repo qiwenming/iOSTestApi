@@ -51,10 +51,13 @@ public class ChartFilter implements Filter {
         //3. 从请求头上获取到我们的客户端，客户端类型（1：安卓 2：iOS）
         String clientType = request.getHeader(Contanst.QWM_CLIENT_TYPE);
         ResponseStatusCode statusCode = OK;
-        if (TextUtils.isEmpty(clientType)) {//没有传递客户端而类型，那么不让通过，告诉用户需要传递客户端类型
-            statusCode = CLIENT_TYPE_NULL;
-        } else if (!"1".equals(clientType) && !"2".equals(clientType)) {
-            statusCode = CLIENT_TYPE_ERROR;;
+        if(uri.contains("login")) {
+            //只有login 接口才需要 客户端类型
+            if (TextUtils.isEmpty(clientType)) {//没有传递客户端而类型，那么不让通过，告诉用户需要传递客户端类型
+                statusCode = CLIENT_TYPE_NULL;
+            } else if (!"1".equals(clientType) && !"2".equals(clientType)) {
+                statusCode = CLIENT_TYPE_ERROR;
+            }
         }
 
         if(statusCode!=OK){//返回

@@ -24,4 +24,14 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <!--视频集合接口-->
+    <servlet>
+        <servlet-name>VideosServlet</servlet-name>
+        <servlet-class>com.qwm.iostestapi.servlet.VideosServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>VideosServlet</servlet-name>
+        <url-pattern>/video</url-pattern>
+    </servlet-mapping>
+
 </web-app>
