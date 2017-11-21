@@ -25,7 +25,7 @@ import static com.qwm.iostestapi.response.ResponseStatusCode.*;
  * 文件上传 表单方式
  */
 public class UploadFileServlet extends BaseServlet<UploadRespBean> {
-    private static String uploadDir = "/WEB-INF/upload";
+    private static String uploadDir = "/upload";
     @Override
     public BaseResponseBean<UploadRespBean> handlerRequest(HttpServletRequest req, HttpServletResponse resp) {
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
@@ -88,7 +88,7 @@ public class UploadFileServlet extends BaseServlet<UploadRespBean> {
                     in.close();
                     item.delete();
                     //设置提示
-                    uploadRespBean.fileName = filename;
+                    uploadRespBean.fileName = uploadDir+"/"+filename;
                     baseResponseBean.setStatusCode(OK);
                     baseResponseBean.msg = "上传成功";
                     baseResponseBean.t = uploadRespBean;

@@ -26,7 +26,7 @@ import static com.qwm.iostestapi.response.ResponseStatusCode.*;
  * 文件上传  非表单方式 直接流的方式
  */
 public class UploadFileServlet2 extends BaseServlet<UploadRespBean> {
-    private static String uploadDir = "/WEB-INF/upload";
+    private static String uploadDir = "/upload";
     @Override
     public BaseResponseBean<UploadRespBean> handlerRequest(HttpServletRequest request, HttpServletResponse resp) {
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
@@ -54,9 +54,11 @@ public class UploadFileServlet2 extends BaseServlet<UploadRespBean> {
         try {
             baseResponseBean.setStatusCode(UPLOAD_HAVE_NOT_FILE);
             UploadRespBean uploadRespBean = new UploadRespBean();
-
+            if(!fileExtension.startsWith(".")){
+                fileExtension = "."+fileExtension;
+            }
             String filename = System.currentTimeMillis()+fileExtension;
-            filename = Md5Utils.md5Encode(filename) + "." +filename.substring( filename.lastIndexOf(".")+1 );
+            filename = Md5Utils.md5Encode(filename) + fileExtension;
 
             //获取输入流
             //创建文件输出流
@@ -73,7 +75,7 @@ public class UploadFileServlet2 extends BaseServlet<UploadRespBean> {
             fis.close();
             inputSteam.close();
             //设置提示
-            uploadRespBean.fileName = filename;
+            uploadRespBean.fileName = uploadDir+"/"+filename;
             baseResponseBean.setStatusCode(OK);
             baseResponseBean.msg = "上传成功";
             baseResponseBean.t = uploadRespBean;

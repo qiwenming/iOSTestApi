@@ -63,7 +63,7 @@
     "code": 200,
     "msg": "上传成功",
     "t": {
-        "fileName": "66eb66e9142b0a768fb463d89e59a50d.ini"
+        "fileName": "/upload/a5fc2d74fbf153bded4eca87fbdba844.jpg"
     }
 }
 ```
@@ -73,7 +73,22 @@
     <code>200</code>
     <msg>上传成功</msg>
     <t>
-        <fileName>66eb66e9142b0a768fb463d89e59a50d.ini</fileName>
+        <fileName>/upload/a5fc2d74fbf153bded4eca87fbdba844.jpg</fileName>
     </t>
 </data>
 ```
+
+
+### 图片完整地址
+
+如果需要查看图片，请使用完整地址：基础地址+上面返回的地址 即可。
+
+如：
+
+基础地址是：http://127.0.0.1:8080/qwmapi
+
+放回地址是：/upload/a5fc2d74fbf153bded4eca87fbdba844.jpg
+
+下面的地址就是图片的完整地址：
+
+http://127.0.0.1:8080/qwmapi/upload/a5fc2d74fbf153bded4eca87fbdba844.jpg
