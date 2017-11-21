@@ -20,6 +20,7 @@ public enum  ResponseStatusCode {
     UPLOAD_FROM_UPLOAD(20010, "请以表单的方式上传数据"),
     UPLOAD_HAVE_NOT_FILE(20011, "请添加上传的文件"),
     UPLOAD_FAIL(20012, "文件上传失败"),
+    UPLOAD_HAVE_NOT_EX(20013, "请添加文件扩展名"),
 
     WEATHER_NO_CITY(20020, "请添加查询城市"),
     WEATHER_NO_INFO(20021, "没有此城市的天气信息");

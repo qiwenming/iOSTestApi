@@ -12,12 +12,13 @@
 
 [2.1 登录接口](apidoc/login.md)
 
-
 [2.2 视频列表接口](apidoc/videosinfo.md)
 
 [2.3 上传文件接口](apidoc/upload.md)
 
-[2.4 天气查询接口](apidoc/weather.md)
+[2.4 上传文件接口2](apidoc/upload2.md)
+
+[2.5 天气查询接口](apidoc/weather.md)
 
 
 ---

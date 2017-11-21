@@ -76,6 +76,17 @@
     <input type="submit" value="上传">
 </form>
 
+<p>-------------文件上传2-------------<br>
+    直接流方式上传，不使用表单
+<%--<form action="upload2" method="post" enctype="multipart/form-data">
+    <input type="file" name="file"><br>
+    返回数据格式<select name="dataType">
+    <option value="JSON">JSON</option>
+    <option value="XML">XML</option>
+</select><br>
+    <input type="submit" value="上传">
+</form>--%>
+
 <br>
 <p>-------------多值参数-------------<br>
 <form action="weather" method="get">

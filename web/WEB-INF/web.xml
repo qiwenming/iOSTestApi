@@ -44,6 +44,16 @@
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
 
+    <!--文件上传接口-->
+    <servlet>
+        <servlet-name>UploadFileServlet2</servlet-name>
+        <servlet-class>com.qwm.iostestapi.servlet.UploadFileServlet2</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadFileServlet2</servlet-name>
+        <url-pattern>/upload2</url-pattern>
+    </servlet-mapping>
+
     <!--获取天气接口-->
     <servlet>
         <servlet-name>WeatherServlet</servlet-name>

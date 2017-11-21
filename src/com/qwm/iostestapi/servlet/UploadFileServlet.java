@@ -22,7 +22,7 @@ import static com.qwm.iostestapi.response.ResponseStatusCode.*;
  * @author: wiming
  * @date: 2017-09-13 13:52:44  星期三
  * @decription:
- * 文件上传
+ * 文件上传 表单方式
  */
 public class UploadFileServlet extends BaseServlet<UploadRespBean> {
     private static String uploadDir = "/WEB-INF/upload";
