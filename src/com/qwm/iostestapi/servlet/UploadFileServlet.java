@@ -73,7 +73,7 @@ public class UploadFileServlet extends BaseServlet<UploadRespBean> {
                     }
                     filename = Md5Utils.md5Encode(filename) + "." +filename.substring( filename.lastIndexOf(".")+1 );
                     //获取输入流
-                    InputStream in = req.getInputStream();
+                    InputStream in = item.getInputStream();
                     //创建文件输出流
                     FileOutputStream fout = new FileOutputStream(savePath+"\\"+filename);
                     //创建缓冲区
@@ -83,6 +83,7 @@ public class UploadFileServlet extends BaseServlet<UploadRespBean> {
                     while( (len=in.read(buf)) >0){
                         fout.write(buf,0,len);
                     }
+                    fout.flush();
                     fout.close();
                     in.close();
                     item.delete();
